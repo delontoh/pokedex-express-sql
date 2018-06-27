@@ -11,6 +11,7 @@ class Home extends React.Component {
             {this.props.pokemon.map(pokemon => (
               <li key={pokemon.id}>
                 {pokemon.name}
+                }
               </li>
             ))}
           </ul>

@@ -2,16 +2,17 @@ var React = require("react");
 
 class Edit extends React.Component {
   render() {
+
+    let formPath = '/' + this.props.pokemon.id + '?_method=PUT';
+
     return (
       <html>
         <head />
         <body>
           <h4>Editing: {this.props.pokemon.name}</h4>
-          <form
-            className="pokemon-form"
-            method="POST"
-            action={"/pokemons/edit/"+ this.props.pokemon.id + "?_method=PUT"}
-          >
+          
+          <form className="pokemon-form" method="POST" action={formPath}>
+
             <div className="pokemon-attribute">
               id:<input name="id" type="text" defaultValue={this.props.pokemon.id} />
             </div>
@@ -50,7 +51,7 @@ class Edit extends React.Component {
                 defaultValue={this.props.pokemon.weight}
               />
             </div>
-            <div className="pokemon-attribute">
+  {/*          <div className="pokemon-attribute">
               candy:<input
                 name="candy"
                 type="text"
@@ -84,7 +85,7 @@ class Edit extends React.Component {
                 type="text"
                 defaultValue={this.props.pokemon.spawn_time}
               />
-            </div>
+            </div>*/}
             <input name="submit" type="submit" />
           </form>
         </body>

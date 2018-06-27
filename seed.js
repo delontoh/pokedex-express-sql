@@ -5,10 +5,10 @@ const FILE = 'pokedex.json';
 // REMEMBER TO CHANGE YOUR CONFIGS BEFORE RUNNING THIS SCRIPT!!
 const pg = require('pg');
 const configs = {
-	user: 'scottlee',
+	user: 'delontoh89',
 	host: '127.0.0.1',
 	database: 'pokemons',
-	port: '5432'
+	port: 5432,
 };
 
 const client = new pg.Client(configs);
