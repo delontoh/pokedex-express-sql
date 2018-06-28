@@ -3,14 +3,15 @@ var React = require("react");
 class Edit extends React.Component {
   render() {
 
-    let formPath = '/' + this.props.pokemon.id + '?_method=PUT';
+    let formPath = '/pokemon/edit/' + this.props.pokemon.id + '?_method=PUT';
+    let formPath2 = '/pokemon/edit/' + this.props.pokemon.id + '?_method=DELETE';
 
     return (
       <html>
         <head />
         <body>
           <h4>Editing: {this.props.pokemon.name}</h4>
-          
+
           <form className="pokemon-form" method="POST" action={formPath}>
 
             <div className="pokemon-attribute">
@@ -86,8 +87,13 @@ class Edit extends React.Component {
                 defaultValue={this.props.pokemon.spawn_time}
               />
             </div>*/}
-            <input name="submit" type="submit" />
+            <input name="submit" type="submit" value="Edit" />
           </form>
+
+          <form method='POST' action= {formPath2}>
+          <input name='delete btn' type='submit' value='Delete' />
+          </form>
+
         </body>
       </html>
     );

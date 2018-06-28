@@ -110,8 +110,8 @@ app.get('/new', (request, response) => {  // /pokemon/new gives error
 app.post('/pokemon', (request, response) => {
   let params = request.body;
 
-  const queryString = 'INSERT INTO pokemon(name, height) VALUES($1, $2)'
-  const values = [params.name, params.height];
+  const queryString = 'INSERT INTO pokemon(num, name, img, height, weight) VALUES($1, $2, $3, $4, $5) RETURNING *'
+  const values = [params.num, params.name, params.img, params.height, params.weight];
 
   pool.query(queryString, values, (err, result) => {
     if (err) {
@@ -153,12 +153,46 @@ app.get('/:id/edit', (request, response) => {
 });
 
 
-app.put('/:id', (request, response) => {
+app.put('/pokemon/edit/:id', (request, response) => {
 
-  let inputId = 
+  // let inputID = parseInt(request.params.id);
 
+  let body = request.body;
 
+  let queryString = 'UPDATE pokemon SET num = $1, name = $2, img = $3, height = $4, weight = $5 WHERE id = $6 RETURNING *'
+
+  let values = [body.num, body.name, body.img, body.height, body.weight, request.params.id]
+
+  pool.query(queryString, values, (err, result) => {
+    if (err) {
+      console.log('query error:', err.stack);
+    } 
+    else {
+    //   console.log('query result:', result);
+    
+    //   let context = {
+    //     pokemon : result.rows[0]
+    //   }
+    // }
+
+    response.redirect('/pokemon/' + request.params.id)
+    }
+  });
 })
+
+app.delete('/pokemon/edit/:id' , (request, response) => {
+
+  let queryString = 'DELETE FROM pokemon WHERE id =' + request.params.id
+
+  pool.query(queryString, (err, result) => {
+    if (err) {
+      console.log('query error:', err.stack);
+    } 
+    else {
+      response.redirect('/');
+    }
+  });
+});
 
 
 
